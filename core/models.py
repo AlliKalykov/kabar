@@ -4,6 +4,10 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название категории')
 
+    def __str__(self) -> str:
+        return f'{self.name}'
+
+
 class SubCategory(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название подкатегории')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория', related_name='subcategories')
