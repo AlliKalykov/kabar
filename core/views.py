@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, CreateView, ListView, DetailView
+
 from .models import Post, Category, SubCategory, Tag
 from .forms import PostForm, CategoryForm, SubCategoryForm, TagForm
 
@@ -18,6 +19,7 @@ class PostView(CreateView):
 class PostListView(ListView):
     model = Post
     template_name = 'core/post-list.html'
+    # context_object_name = 'posts'
 
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all()
@@ -32,7 +34,8 @@ class PostDetailView(DetailView):
     template_name = 'core/post-detail.html'
 
     def get(self, request, *args, **kwargs):
-        post = Post.objects.get(id=kwargs['pk'])
+        post = get_object_or_404(Post, pk=kwargs['pk'])
+        # post = Post.objects.get(pk=kwargs['pk'])
         context = {
             'post': post
         }

@@ -12,8 +12,15 @@ class SubCategory(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название подкатегории')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория', related_name='subcategories')
 
+    def __str__(self) -> str:
+        return f'{self.name}'
+
 class Tag(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название тега')
+
+    def __str__(self) -> str:
+        return f'{self.name}'
+    
 
 class Post(models.Model):
     title = models.CharField(max_length=255, verbose_name='Заголовок')
@@ -23,3 +30,6 @@ class Post(models.Model):
     poster = models.ImageField(upload_to='posters', verbose_name='Постер')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата обновления')
+
+    def __str__(self) -> str:
+        return f'{self.title}'
