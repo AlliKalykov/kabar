@@ -1,0 +1,7 @@
+{% block content %}
+<h1>Комментарии</h1>
+<form action="/comment-create/" method="POST">
+  {{ form.as_p }} {% csrf_token %}
+  <input type="submit" value="Сохранить" />
+</form>
+{% endblock %}

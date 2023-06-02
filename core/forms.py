@@ -1,4 +1,4 @@
-from .models import Post, SubCategory, Category, Tag
+from .models import Post, SubCategory, Category, Tag, Comment
 from django import forms
 
 class PostForm(forms.ModelForm):
@@ -39,4 +39,16 @@ class TagForm(forms.ModelForm):
         fields = ('name',)
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text', 'author', 'post')
+        exclude_fields = ('created_at',)
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
+            'author': forms.Select(attrs={'class': 'form-control'}),
+            'post': forms.Select(attrs={'class': 'form-control'}),
         }
